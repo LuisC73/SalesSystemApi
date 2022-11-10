@@ -56,31 +56,37 @@ export function createSeller(req, res) {
 
 // ------ Venta
 
-export function readArticulos(req, res) {
-  return Articulo.find({}, (err, data) => {
+export function readSale(req, res) {
+  return Sale.find({}, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
   });
 }
 
-export function readArticulo(req, res) {
-  return Articulo.findOne({ _id: req.params.id }, (err, data) => {
+export function readSale(req, res) {
+  return Sale.findOne({ _id: req.params.id }, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
   });
 }
 
-export function deleteArticulo(req, res) {
-  return Articulo.findOneAndRemove({ _id: req.params.id }, (err, data) => {
+export function deleteSale(req, res) {
+  return Sale.findOneAndRemove({ _id: req.params.id }, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
   });
 }
 
-export function updateArticulo(req, res) {
-  return Articulo.findOneAndUpdate(
+export function updateSale(req, res) {
+  return Sale.findOneAndUpdate(
     { _id: req.params.id },
-    { $set: { nombre: req.body.nombre, precio: req.body.precio } },
+    {
+      $set: {
+        zone: req.body.zone,
+        date: req.body.date,
+        saleValue: req.body.saleValue,
+      },
+    },
     (err, data) => {
       if (err) res.json({ error: err });
       else res.json(data);
@@ -88,10 +94,11 @@ export function updateArticulo(req, res) {
   );
 }
 
-export function createArticulo(req, res) {
-  return new Articulo({
-    nombre: req.body.nombre,
-    precio: req.body.precio,
+export function createSale(req, res) {
+  return new Sale({
+    zone: req.body.zone,
+    date: req.body.date,
+    saleValue: req.body.saleValue,
   }).save((err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
