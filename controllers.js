@@ -2,7 +2,7 @@ import { Seller, Sale } from "./models.js";
 
 // Vendedor
 
-export function readSeller(req, res) {
+export function readSellers(req, res) {
   return Seller.find({}, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
@@ -56,7 +56,7 @@ export function createSeller(req, res) {
 
 // ------ Venta
 
-export function readSale(req, res) {
+export function readSales(req, res) {
   return Sale.find({}, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
