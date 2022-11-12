@@ -10,25 +10,22 @@ export function readSellers(req, res) {
 }
 
 export function readSeller(req, res) {
-  return Seller.findOne({ idSeller: req.params.idSeller }, (err, data) => {
+  return Seller.findOne({ _id: req.params.id }, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
   });
 }
 
 export function deleteSeller(req, res) {
-  return Seller.findOneAndRemove(
-    { idSeller: req.params.idSeller },
-    (err, data) => {
-      if (err) res.json({ error: err });
-      else res.json(data);
-    }
-  );
+  return Seller.findOneAndRemove({ _id: req.params.id }, (err, data) => {
+    if (err) res.json({ error: err });
+    else res.json(data);
+  });
 }
 
 export function updateSeller(req, res) {
   return Seller.findOneAndUpdate(
-    { idSeller: req.params.idSeller },
+    { _id: req.params.id },
     {
       $set: {
         name: req.body.name,
