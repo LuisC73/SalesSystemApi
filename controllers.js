@@ -17,13 +17,10 @@ export function readSeller(req, res) {
 }
 
 export function deleteSeller(req, res) {
-  return Seller.findOneAndRemove(
-    { idSeller: req.params.id },
-    (err, data) => {
-      if (err) res.json({ error: err });
-      else res.json(data);
-    }
-  );
+  return Seller.findOneAndRemove({ idSeller: req.params.id }, (err, data) => {
+    if (err) res.json({ error: err });
+    else res.json(data);
+  });
 }
 
 export function updateSeller(req, res) {
@@ -72,13 +69,10 @@ export function readSale(req, res) {
 }
 
 export function deleteSale(req, res) {
-  return Sale.findOneAndRemove(
-    { idSeller: req.params.id },
-    (err, data) => {
-      if (err) res.json({ error: err });
-      else res.json(data);
-    }
-  );
+  return Sale.findOneAndRemove({ idSeller: req.params.id }, (err, data) => {
+    if (err) res.json({ error: err });
+    else res.json(data);
+  });
 }
 
 export function updateSale(req, res) {
@@ -98,7 +92,7 @@ export function updateSale(req, res) {
   );
 }
 
-export function createSale(req, res) {
+export function x(req, res) {
   return new Sale({
     idSeller: req.body.idSeller,
     zone: req.body.zone,
@@ -109,3 +103,33 @@ export function createSale(req, res) {
     else res.json(data);
   });
 }
+
+//      idSeller: Number,
+//     zone: String,
+//     date: String,
+//     saleValue: Number,
+
+export const createSale = async (req, res) => {
+  console.log(req);
+  const idSeller = req.idSeller;
+  const zone = "sur";
+  const date = "hoy";
+  const saleValue = 3423;
+
+  const savedsale = new Sale({
+    idSeller,
+    zone,
+    date,
+    saleValue,
+  }).save();
+
+  const vendor = Seller.findById(idSeller);
+
+  vendor.sales.push(savedsale);
+  vendor.save();
+
+  const sales = await vendor.find().populate("sales");
+  console.log(sales);
+
+  return res.json(sales);
+};
