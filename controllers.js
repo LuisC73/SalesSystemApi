@@ -10,22 +10,25 @@ export function readSellers(req, res) {
 }
 
 export function readSeller(req, res) {
-  return Seller.findOne({ _id: req.params.id }, (err, data) => {
+  return Seller.findOne({ idSeller: req.params.id }, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
   });
 }
 
 export function deleteSeller(req, res) {
-  return Seller.findOneAndRemove({ _id: req.params.id }, (err, data) => {
-    if (err) res.json({ error: err });
-    else res.json(data);
-  });
+  return Seller.findOneAndRemove(
+    { idSeller: req.params.id },
+    (err, data) => {
+      if (err) res.json({ error: err });
+      else res.json(data);
+    }
+  );
 }
 
 export function updateSeller(req, res) {
   return Seller.findOneAndUpdate(
-    { _id: req.params.id },
+    { idSeller: req.params.id },
     {
       $set: {
         name: req.body.name,
@@ -42,6 +45,7 @@ export function updateSeller(req, res) {
 
 export function createSeller(req, res) {
   return new Seller({
+    idSeller: req.body.idSeller,
     name: req.body.name,
     email: req.body.email,
     totalCommission: req.body.totalCommission,
@@ -61,22 +65,25 @@ export function readSales(req, res) {
 }
 
 export function readSale(req, res) {
-  return Sale.findOne({ _id: req.params.id }, (err, data) => {
+  return Sale.findOne({ idSeller: req.params.id }, (err, data) => {
     if (err) res.json({ error: err });
     else res.json(data);
   });
 }
 
 export function deleteSale(req, res) {
-  return Sale.findOneAndRemove({ _id: req.params.id }, (err, data) => {
-    if (err) res.json({ error: err });
-    else res.json(data);
-  });
+  return Sale.findOneAndRemove(
+    { idSeller: req.params.id },
+    (err, data) => {
+      if (err) res.json({ error: err });
+      else res.json(data);
+    }
+  );
 }
 
 export function updateSale(req, res) {
   return Sale.findOneAndUpdate(
-    { _id: req.params.id },
+    { idSeller: req.params.id },
     {
       $set: {
         zone: req.body.zone,
@@ -93,6 +100,7 @@ export function updateSale(req, res) {
 
 export function createSale(req, res) {
   return new Sale({
+    idSeller: req.body.idSeller,
     zone: req.body.zone,
     date: req.body.date,
     saleValue: req.body.saleValue,
