@@ -7,12 +7,6 @@ const Seller = model(
     name: String,
     email: String,
     totalCommission: Number,
-    sales: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Sale",
-      },
-    ],
   })
 );
 

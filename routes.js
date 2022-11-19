@@ -5,6 +5,7 @@ import {
   readSeller,
   deleteSeller,
   updateSeller,
+  updateTotal,
   createSeller,
   readSales,
   readSale,
@@ -21,6 +22,7 @@ router.get("/sellers", cors(), readSellers); // Read All
 router.get("/sellers/:id", cors(), readSeller); // Read
 router.delete("/sellers/:id", cors(), deleteSeller); // Delete
 router.put("/sellers/:id", cors(), updateSeller); // Update
+router.put("/sellers/:id", cors(), updateTotal); // Update Total
 router.post("/sellers", cors(), createSeller); // Create
 
 router.get("/sales", cors(), readSales); // Read All
